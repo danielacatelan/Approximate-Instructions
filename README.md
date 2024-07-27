@@ -24,43 +24,65 @@ O projeto de instruções aproximadas do tipo inteiro (addx, subx, mulx, divx) e
      $ sudo apt-get install autoconf automake autotools-dev curl python3 libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev libexpat-dev git
 
      $ git clone https://github.com/riscv/riscv-gnu-toolchain
+     
      $ cd riscv-gnu-toolchain
+     
      $ ./configure --prefix=/opt/riscv --with-arch=rv32i --with-abi=ilp32
+     
      $ sudo make
+     
      $ cd ..
+     
      $ export PATH=$PATH:/opt/riscv/bin
 
   2. **RISCV-OPCODES**
     git clone https://github.com/riscv/riscv-opcodes.git
+
     Download. Copy the contents into the riscv-opcodes folder (I replaced the existing encoding.h file)
+    
    https://github.com/riscv/riscv-opcodes/tree/7c3db437d8d3b6961f8eb2931792eaea1c469ff3
 
-   3. **RISCV-OPENOCD**
+   4. **RISCV-OPENOCD**
      git clone https://github.com/riscv/riscv-openocd.git
         
-  4. **RISCV-FERSV**
+  5. **RISCV-FERSV**
 	$ cd riscv-fesvr
+
 	$ mkdir build && cd build
+ 
 	$ ../configure --prefix=/opt/riscv
+ 
 	$ sudo make install
+ 
 	$ cd ../..
 
-  5. **RISCV-PK**
+  7. **RISCV-PK**
 	$ cd riscv-pk
+
 	$ mkdir build && cd build
+ 
 	$ ../configure --prefix=/opt/riscv --host=riscv32-unknown-elf
+ 
         OBS: pode ser que precise colocar:
 	    ->$ ../configure --prefix=/opt/riscv --host=riscv32-unknown-elf --with-arch=rv32imafdc_zicsr_zifencei
+     
 	$ make
+ 
 	$ sudo make install
+ 
 	$ cd ../..
 
-  6. **RISCV-ISA-SIM (SPIKE)**
+  9. **RISCV-ISA-SIM (SPIKE)**
 	$ cd riscv-isa-sim
+
 	$ sudo apt-get install device-tree-compiler
+ 
 	$ mkdir build && cd build
+ 
 	$ ../configure --prefix=/opt/riscv 
+ 
 	$ make
+ 
 	$ sudo make install
        
 ## Instrução Aproximada
