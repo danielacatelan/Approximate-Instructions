@@ -17,29 +17,30 @@ O projeto de instruções aproximadas do tipo inteiro (addx, subx, mulx, divx) e
 > Para a utilização da instrução aproximada é preciso ter as ferramentas abaixo, devidamente instaladas.
 
   1. **RISC-V Toolchain**
-   - Disponível em: [RISC-V Toolchain](https://github.com/riscv-collab/riscv-gnu-toolchain). \     
+   - Disponível em: [RISC-V Toolchain](https://github.com/riscv-collab/riscv-gnu-toolchain).      
    - OBS: procedimentos utilizados por mim para a instalação, baseando-me no repositório original.
 
     $ sudo apt-get install autoconf automake autotools-dev curl python3 libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev libexpat-dev git
 
-     $ git clone https://github.com/riscv/riscv-gnu-toolchain
+    $ git clone https://github.com/riscv/riscv-gnu-toolchain
      
-     $ cd riscv-gnu-toolchain
+    $ cd riscv-gnu-toolchain
      
-     $ ./configure --prefix=/opt/riscv --with-arch=rv32i --with-abi=ilp32
+    $ ./configure --prefix=/opt/riscv --with-arch=rv32i --with-abi=ilp32
      
-     $ sudo make
+    $ sudo make
      
-     $ cd ..
+    $ cd ..
      
-     $ export PATH=$PATH:/opt/riscv/bin
+    $ export PATH=$PATH:/opt/riscv/bin
 
   2. **RISCV-OPCODES**
+     
      git clone https://github.com/riscv/riscv-opcodes.git \
-     Download. Copy the contents into the riscv-opcodes folder (I replaced the existing encoding.h file)\
+     Download. Copy the contents into the riscv-opcodes folder (I replaced the existing encoding.h file) \
      https://github.com/riscv/riscv-opcodes/tree/7c3db437d8d3b6961f8eb2931792eaea1c469ff3
 
-   3. **RISCV-OPENOCD**
+   4. **RISCV-OPENOCD**
       
      git clone https://github.com/riscv/riscv-openocd.git
         
@@ -207,7 +208,9 @@ e: Rebuild RISCV-GNU-TOOLCHAIN
 
 f: Teste da instalação da instrução aproximada no RISCV-Toolchain
 
-$cd test/addx.c 
+    $ cd test/addx.c 
+
+\
 
     #include <stdio.h>
      int main(){
@@ -231,14 +234,15 @@ $cd test/addx.c
     return 0;
     }
 
-$ riscv32-unknown-elf-gcc addx.c -O1 -march=rv32im -o addx 
+\
 
-$ riscv32-unknown-elf-objdump -dC addx > addx.dump
+    $ riscv32-unknown-elf-gcc addx.c -O1 -march=rv32im -o addx 
+    $ riscv32-unknown-elf-objdump -dC addx > addx.dump
 
 
 2. **Inserção da Instruções Aproximadas no SPIKE**
 
-   a: In the riscv-isa-sim/riscv/encoding.h add the following lines: 
+   a: In the riscv-isa-sim/riscv/encoding.h add the following lines: \
       a.1: Verificar se no arquivo encoding.h do PK (riscv-pk/machine/encoding.h) foi atualizado, caso não: atualizar e rebutar o riscv-pk
   
 #define MATCH_ADDX 0x200002b \
@@ -348,8 +352,8 @@ f: Acrescentar no arquivo riscv-isa-sim/softfloat/softfloat.h \
 
 g: Rebuild spike/build
 
-$ cd riscv-isa-sim/build \
-$ sudo make install
+    $ cd riscv-isa-sim/build 
+    $ sudo make install
 
 -->> SE DER ERRO NO REBUILD: \
 ex: HGATP_MODE_SV57X4 (fora do escopo) \
@@ -357,12 +361,13 @@ ex: HGATP_MODE_SV57X4 (fora do escopo) \
 
 h: Test Spike
 
-$ spike --isa=RV32I /opt/riscv/riscv32-unknown-elf/bin/pk addx
+    $ spike --isa=RV32I /opt/riscv/riscv32-unknown-elf/bin/pk addx
 
-For new example: \
-$ riscv32-unknown-elf-gcc test.c -O1 -march=rv32im -o test
-$ riscv32-unknown-elf-objdump -dC test > test.dump
-$ spike --isa=RV32I /opt/riscv/riscv32-unknown-elf/bin/pk test
+For new example: 
+
+    $ riscv32-unknown-elf-gcc test.c -O1 -march=rv32im -o test
+    $ riscv32-unknown-elf-objdump -dC test > test.dump
+    $ spike --isa=RV32I /opt/riscv/riscv32-unknown-elf/bin/pk test
 
 
 
