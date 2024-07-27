@@ -18,7 +18,9 @@ O projeto de instruções aproximadas do tipo inteiro (addx, subx, mulx, divx) e
 > Para a utilização da instrução aproximada é preciso ter as ferramentas abaixo, devidamente instaladas.
 
   1. **RISC-V Toolchain**
+     
    - Disponível em: [RISC-V Toolchain](https://github.com/riscv-collab/riscv-gnu-toolchain).
+     
    - OBS: procedimentos utilizados por mim para a instalação, baseando-me no repositório original.
 
      $ sudo apt-get install autoconf automake autotools-dev curl python3 libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev libexpat-dev git
@@ -36,16 +38,19 @@ O projeto de instruções aproximadas do tipo inteiro (addx, subx, mulx, divx) e
      $ export PATH=$PATH:/opt/riscv/bin
 
   2. **RISCV-OPCODES**
+     
     git clone https://github.com/riscv/riscv-opcodes.git
 
     Download. Copy the contents into the riscv-opcodes folder (I replaced the existing encoding.h file)
     
-   https://github.com/riscv/riscv-opcodes/tree/7c3db437d8d3b6961f8eb2931792eaea1c469ff3
+    https://github.com/riscv/riscv-opcodes/tree/7c3db437d8d3b6961f8eb2931792eaea1c469ff3
 
-   4. **RISCV-OPENOCD**
+   3. **RISCV-OPENOCD**
+      
      git clone https://github.com/riscv/riscv-openocd.git
         
-  5. **RISCV-FERSV**
+   4. **RISCV-FERSV**
+     
 	$ cd riscv-fesvr
 
 	$ mkdir build && cd build
@@ -56,7 +61,8 @@ O projeto de instruções aproximadas do tipo inteiro (addx, subx, mulx, divx) e
  
 	$ cd ../..
 
-  7. **RISCV-PK**
+   5. **RISCV-PK**
+     
 	$ cd riscv-pk
 
 	$ mkdir build && cd build
@@ -64,6 +70,7 @@ O projeto de instruções aproximadas do tipo inteiro (addx, subx, mulx, divx) e
 	$ ../configure --prefix=/opt/riscv --host=riscv32-unknown-elf
  
         OBS: pode ser que precise colocar:
+	
 	    ->$ ../configure --prefix=/opt/riscv --host=riscv32-unknown-elf --with-arch=rv32imafdc_zicsr_zifencei
      
 	$ make
@@ -72,7 +79,8 @@ O projeto de instruções aproximadas do tipo inteiro (addx, subx, mulx, divx) e
  
 	$ cd ../..
 
-  9. **RISCV-ISA-SIM (SPIKE)**
+  6. **RISCV-ISA-SIM (SPIKE)**
+      
 	$ cd riscv-isa-sim
 
 	$ sudo apt-get install device-tree-compiler
@@ -86,10 +94,13 @@ O projeto de instruções aproximadas do tipo inteiro (addx, subx, mulx, divx) e
 	$ sudo make install
        
 ## Instrução Aproximada
+
    - Após a instalação das ferramentas, é preciso adicionar a instrução aproximada.
+     
    - Será preciso adicionar a instrução aproximada no RISC-V Toolchain e no SPIKE, seguindo corretamente o passo a passo a seguir.
   
 1. **Inserção da Instruções Aproximadas no RISCV-TOOLCHAIN**
+   
   a: Enter the directory riscv-opcodes and edit opcodes (riscv-opcodes/opcodes)
 -> integer
 addx    rd rs1 rs2 31..25=1  14..12=0 6..2=0x0A 1..0=3
