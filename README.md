@@ -17,12 +17,11 @@ O projeto de instruções aproximadas do tipo inteiro (addx, subx, mulx, divx) e
 > Para a utilização da instrução aproximada é preciso ter as ferramentas abaixo, devidamente instaladas.
 
   1. **RISC-V Toolchain**
-     
    - Disponível em: [RISC-V Toolchain](https://github.com/riscv-collab/riscv-gnu-toolchain). \     
    - OBS: procedimentos utilizados por mim para a instalação, baseando-me no repositório original.
 
-     $ sudo apt-get install autoconf automake autotools-dev curl python3 libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev libexpat-dev git
-     
+    $ sudo apt-get install autoconf automake autotools-dev curl python3 libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev libexpat-dev git
+
      $ git clone https://github.com/riscv/riscv-gnu-toolchain
      
      $ cd riscv-gnu-toolchain
@@ -36,12 +35,9 @@ O projeto de instruções aproximadas do tipo inteiro (addx, subx, mulx, divx) e
      $ export PATH=$PATH:/opt/riscv/bin
 
   2. **RISCV-OPCODES**
-     
-    git clone https://github.com/riscv/riscv-opcodes.git
-
-    Download. Copy the contents into the riscv-opcodes folder (I replaced the existing encoding.h file)
-    
-    https://github.com/riscv/riscv-opcodes/tree/7c3db437d8d3b6961f8eb2931792eaea1c469ff3
+     git clone https://github.com/riscv/riscv-opcodes.git \
+     Download. Copy the contents into the riscv-opcodes folder (I replaced the existing encoding.h file)\
+     https://github.com/riscv/riscv-opcodes/tree/7c3db437d8d3b6961f8eb2931792eaea1c469ff3
 
    3. **RISCV-OPENOCD**
       
@@ -69,7 +65,7 @@ O projeto de instruções aproximadas do tipo inteiro (addx, subx, mulx, divx) e
  
         OBS: pode ser que precise colocar:
 	
-	    ->$ ../configure --prefix=/opt/riscv --host=riscv32-unknown-elf --with-arch=rv32imafdc_zicsr_zifencei
+	    -> $ ../configure --prefix=/opt/riscv --host=riscv32-unknown-elf --with-arch=rv32imafdc_zicsr_zifencei
      
 	$ make
  
@@ -93,12 +89,12 @@ O projeto de instruções aproximadas do tipo inteiro (addx, subx, mulx, divx) e
        
 ## Instrução Aproximada
 
-   - Após a instalação das ferramentas, é preciso adicionar a instrução aproximada. \     
+   - Após a instalação das ferramentas, é preciso adicionar a instrução aproximada.     
    - Será preciso adicionar a instrução aproximada no RISC-V Toolchain e no SPIKE, seguindo corretamente o passo a passo a seguir. 
   
 1. **Inserção da Instruções Aproximadas no RISCV-TOOLCHAIN**
    
-  a: Enter the directory riscv-opcodes and edit opcodes (riscv-opcodes/opcodes) \  
+  a: Enter the directory riscv-opcodes and edit opcodes (riscv-opcodes/opcodes)  
 -> integer \
 addx    rd rs1 rs2 31..25=1  14..12=0 6..2=0x0A 1..0=3 \
 subx    rd rs1 rs2 31..25=1  14..12=0 6..2=0x0B 1..0=3 \
@@ -111,8 +107,8 @@ fsubx.s   rd rs1 rs2      31..27=0x11 rm       26..25=0 6..2=0x14 1..0=3 \
 fmulx.s   rd rs1 rs2      31..27=0x12 rm       26..25=0 6..2=0x14 1..0=3 \
 fdivx.s   rd rs1 rs2      31..27=0x13 rm       26..25=0 6..2=0x14 1..0=3  
      
-$ cd riscv-opcodes
-$ cat /home/dani/riscv-opcodes/opcodes | /home/dani/riscv-opcodes/parse-opcodes -c > /home/dani/riscv-opcodes/instructionInfo.h
+     $ cd riscv-opcodes
+     $ cat /home/dani/riscv-opcodes/opcodes | /home/dani/riscv-opcodes/parse-opcodes -c > /home/dani/riscv-opcodes/instructionInfo.h
 
 b: Open the instructionInfo.h file and check the lines:
 
@@ -202,45 +198,47 @@ riscv-gnu-toolchain/riscv-binutils/opcodes/riscv-opc.c
 
 e: Rebuild RISCV-GNU-TOOLCHAIN
 
-  $ cd riscv-gnu-toolchain
-  $ make clean
-  $ ./configure --prefix=/opt/riscv --with-arch=rv32i --with-abi=ilp32
+    $ cd riscv-gnu-toolchain
+    $ make clean
+    $ ./configure --prefix=/opt/riscv --with-arch=rv32i --with-abi=ilp32
       OR
-  $ ./configure --prefix=/opt/riscv --with-arch=rv32imafdc --with-abi=ilp32
-  $ sudo make
+    $ ./configure --prefix=/opt/riscv --with-arch=rv32imafdc --with-abi=ilp32
+    $ sudo make
 
 f: Teste da instalação da instrução aproximada no RISCV-Toolchain
 
-$cd test/addx.c \
-#include <stdio.h>
-int main(){
-  int a,b,addx, subx;
-  a = 5;
-  b = 2;
-  asm volatile
-  (
-    "addx   %[z], %[x], %[y]\n\t"
-    : [z] "=r" (addx)
-    : [x] "r" (a), [y] "r" (b)
-   );
-  asm volatile
-  ( 
-    "subx   %[z], %[x], %[y]\n\t"
-    : [z] "=r" (subx)
-    : [x] "r" (a), [y] "r" (b)
-  );
-  printf("ADDX => 5+2=%d\n",addx);
-  printf("SUBX => 5-2=%d\n",subx);
-  return 0;
-}
+$cd test/addx.c 
 
-$ riscv32-unknown-elf-gcc addx.c -O1 -march=rv32im -o addx \
+    #include <stdio.h>
+     int main(){
+     int a,b,addx, subx;
+     a = 5;
+     b = 2;
+    asm volatile
+    (
+      "addx   %[z], %[x], %[y]\n\t"
+      : [z] "=r" (addx)
+      : [x] "r" (a), [y] "r" (b)
+    );
+    asm volatile
+    ( 
+      "subx   %[z], %[x], %[y]\n\t"
+      : [z] "=r" (subx)
+      : [x] "r" (a), [y] "r" (b)
+    );
+    printf("ADDX => 5+2=%d\n",addx);
+    printf("SUBX => 5-2=%d\n",subx);
+    return 0;
+    }
+
+$ riscv32-unknown-elf-gcc addx.c -O1 -march=rv32im -o addx 
+
 $ riscv32-unknown-elf-objdump -dC addx > addx.dump
 
 
 2. **Inserção da Instruções Aproximadas no SPIKE**
 
-   a: In the riscv-isa-sim/riscv/encoding.h add the following lines: \
+   a: In the riscv-isa-sim/riscv/encoding.h add the following lines: 
       a.1: Verificar se no arquivo encoding.h do PK (riscv-pk/machine/encoding.h) foi atualizado, caso não: atualizar e rebutar o riscv-pk
   
 #define MATCH_ADDX 0x200002b \
@@ -279,8 +277,8 @@ b: Criar um arquivo .h com a definição de funcionalidade de cada uma das instr
 
 WRITE_RD(sext_xlen(RS1 ^ RS2 ^ 00000000000000000000000000000000)); //ADDX com adder InXA1 
 
--> **PARA O PONTO FLUTUANTE** \
-   - cria a instrução fxxx_s.h em riscv-isa-sim/riscv/insns (disponível na pasta **Approx_Instructions**) \
+-> **PARA O PONTO FLUTUANTE** 
+   - cria a instrução fxxx_s.h em riscv-isa-sim/riscv/insns (disponível na pasta **Approx_Instructions**) 
    - os arquivos .c devem ser modificados na pasta riscv-isa-sim/softfloat (disponível na pasta **Approx_Instructions**)
 
    A seguir estão descriminados os arquivo que foram alterados para o projeto das instruções aproximadas de ponto flutuante. 
