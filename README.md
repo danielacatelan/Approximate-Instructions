@@ -105,16 +105,16 @@ O projeto de instruções aproximadas do tipo inteiro (addx, subx, mulx, divx) e
   
 -> integer
 
-addx    rd rs1 rs2 31..25=1  14..12=0 6..2=0x0A 1..0=3 \**
-subx    rd rs1 rs2 31..25=1  14..12=0 6..2=0x0B 1..0=3 \**
-mulx    rd rs1 rs2 31..25=1  14..12=0 6..2=0x1C 1..0=3 \**
-divx    rd rs1 rs2 31..25=1  14..12=0 6..2=0x1D 1..0=3 \**
+addx    rd rs1 rs2 31..25=1  14..12=0 6..2=0x0A 1..0=3 \
+subx    rd rs1 rs2 31..25=1  14..12=0 6..2=0x0B 1..0=3 \
+mulx    rd rs1 rs2 31..25=1  14..12=0 6..2=0x1C 1..0=3 \
+divx    rd rs1 rs2 31..25=1  14..12=0 6..2=0x1D 1..0=3 \
 
 -> floating point \**
-faddx.s   rd rs1 rs2      31..27=0x10 rm       26..25=0 6..2=0x14 1..0=3 \**
-fsubx.s   rd rs1 rs2      31..27=0x11 rm       26..25=0 6..2=0x14 1..0=3 \**
-fmulx.s   rd rs1 rs2      31..27=0x12 rm       26..25=0 6..2=0x14 1..0=3 \**
-fdivx.s   rd rs1 rs2      31..27=0x13 rm       26..25=0 6..2=0x14 1..0=3  \**
+faddx.s   rd rs1 rs2      31..27=0x10 rm       26..25=0 6..2=0x14 1..0=3 \
+fsubx.s   rd rs1 rs2      31..27=0x11 rm       26..25=0 6..2=0x14 1..0=3 \
+fmulx.s   rd rs1 rs2      31..27=0x12 rm       26..25=0 6..2=0x14 1..0=3 \
+fdivx.s   rd rs1 rs2      31..27=0x13 rm       26..25=0 6..2=0x14 1..0=3  \
      
 cd riscv-opcodes
 cat /home/dani/riscv-opcodes/opcodes | /home/dani/riscv-opcodes/parse-opcodes -c > /home/dani/riscv-opcodes/instructionInfo.h
