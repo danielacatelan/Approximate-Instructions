@@ -145,7 +145,8 @@ DECLARE_INSN(fdivx_s, MATCH_FDIVX_S, MASK_FDIVX_S)
 
       $ make install
 
-c: Entre nos diretorios seguintes e adicione: \
+c: Entre nos diretórios seguintes e adicione: 
+
 riscv-gnu-toolchain/riscv-gdb/include/opcode/riscv-opc.h \
 riscv-gnu-toolchain/riscv-binutils/include/opcode/riscv-opc.h
 
@@ -178,7 +179,8 @@ DECLARE_INSN(fsubx_s, MATCH_FSUBX_S, MASK_FSUBX_S) \
 DECLARE_INSN(fmulx_s, MATCH_FMULX_S, MASK_FMULX_S) \
 DECLARE_INSN(fdivx_s, MATCH_FDIVX_S, MASK_FDIVX_S) \
 
-d: Entre nos diretorios seguintes e adicione: \
+d: Entre nos diretorios seguintes e adicione: 
+
 riscv-gnu-toolchain/riscv-gdb/opcodes/riscv-opc.c \
 riscv-gnu-toolchain/riscv-binutils/opcodes/riscv-opc.c
 
@@ -213,7 +215,7 @@ Crie um arquivo:
     
     $ cd test/addx.c 
 
-A instrução aproximada é chamada por meio do comando asm volatile, e [x], [y] e [z] representam os registradores de dados e destino.
+A instrução aproximada é chamada por meio do comando *_asm volatile_*, e [x], [y] e [z] representam os registradores de dados e destino.
 
     #include <stdio.h>
      int main(){
@@ -243,9 +245,10 @@ Compile:
     $ riscv32-unknown-elf-objdump -dC addx > addx.dump
 
 
-2. **Inserção da Instruções Aproximadas no SPIKE**
+2. **Inserção das Instruções Aproximadas no SPIKE**
 
-   a: No diretório riscv-isa-sim/riscv/encoding.h adicione as linhas abaixo: \
+   a: No diretório riscv-isa-sim/riscv/encoding.h adicione as linhas abaixo:
+   
       a.1: Verificar se no arquivo encoding.h do PK (riscv-pk/machine/encoding.h) foi atualizado, caso não: atualizar e rebutar o riscv-pk
   
 #define MATCH_ADDX 0x200002b \
@@ -283,7 +286,7 @@ b: Criar um arquivo .h com a definição de funcionalidade de cada uma das instr
    
    Os arquivos precisam ser inseridos na pasta do SPIKE: riscv-isa-sim/riscv/insns/addx.h subx.h ......  
    
-   Exemplo do arquivo da instrução de soma aproximada addx.h 
+   Exemplo do arquivo da instrução de soma aproximada addx.h: 
 
      WRITE_RD(sext_xlen(RS1 ^ RS2 ^ 00000000000000000000000000000000)); //ADDX com adder InXA1 
 
@@ -311,7 +314,7 @@ b: Criar um arquivo .h com a definição de funcionalidade de cada uma das instr
 - fdivx_s.h
   - f32_divx.c
 
-c: Add this file to riscv-isa-sim/riscv/riscv.mk.in
+c: Adicone as linhas abaixo no arquivo: riscv-isa-sim/riscv/riscv.mk.in
 
 riscv_insn_ext_i = \
       ...
@@ -328,7 +331,7 @@ riscv_insn_ext_f = \
       fdivx_s \
       ...
 
-d: Acrescentar no arquivo riscv-isa-sim/softfloat/softfloat.mk.in
+d: Acrescentar no arquivo: riscv-isa-sim/softfloat/softfloat.mk.in
 
   f32_addx.c \
   f32_subx.c \
@@ -341,7 +344,7 @@ d: Acrescentar no arquivo riscv-isa-sim/softfloat/softfloat.mk.in
   
   f32_divx.c 
 
-e: Acrescentar no arquivo riscv-isa-sim/softfloat/internals.h
+e: Acrescentar no arquivo: riscv-isa-sim/softfloat/internals.h
 
 -> para faddx e fsubx: \
   float32_t softfloat_addMagsF32x( uint_fast32_t, uint_fast32_t ); \
@@ -350,13 +353,13 @@ e: Acrescentar no arquivo riscv-isa-sim/softfloat/internals.h
 -> para fmulx:   \
   float32_t softfloat_roundPackToF32x( bool, int_fast16_t, uint_fast32_t );
 
-f: Acrescentar no arquivo riscv-isa-sim/softfloat/softfloat.h \
+f: Acrescentar no arquivo: riscv-isa-sim/softfloat/softfloat.h \
   float32_t f32_addx( float32_t, float32_t ); \
   float32_t f32_subx( float32_t, float32_t ); \
   float32_t f32_mulx( float32_t, float32_t ); \
   float32_t f32_divx( float32_t, float32_t );
 
-g: Rebuild spike/build
+g: Rebuild SPIKE/build
 
     $ cd riscv-isa-sim/build 
     $ sudo make install
@@ -365,11 +368,11 @@ g: Rebuild spike/build
 ex: HGATP_MODE_SV57X4 (fora do escopo) 
    - está faltando alguma coisa, alguma declaração na nova instrução.
 
-h: Test Spike
+h: Teste o SPIKE
 
     $ spike --isa=RV32I /opt/riscv/riscv32-unknown-elf/bin/pk addx
 
-Para testar utilizar os comandos: 
+Para testar o exemplo disponivel no seção do RISC-V (.c) no SPIKE, utilizar os comandos: 
 
     $ riscv32-unknown-elf-gcc test.c -O1 -march=rv32im -o test
     $ riscv32-unknown-elf-objdump -dC test > test.dump
