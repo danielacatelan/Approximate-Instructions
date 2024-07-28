@@ -209,9 +209,11 @@ e: Rebuild RISCV-GNU-TOOLCHAIN
 
 f: Teste da instalação da instrução aproximada no RISCV-Toolchain:
 
+Crie um arquivo:
+    
     $ cd test/addx.c 
 
-
+A instrução aproximada é chamada por meio do comando asm volatile, e [x], [y] e [z] representam os registradores de dados e destino.
 
     #include <stdio.h>
      int main(){
@@ -235,7 +237,7 @@ f: Teste da instalação da instrução aproximada no RISCV-Toolchain:
     return 0;
     }
 
-
+Compile:
 
     $ riscv32-unknown-elf-gcc addx.c -O1 -march=rv32im -o addx 
     $ riscv32-unknown-elf-objdump -dC addx > addx.dump
@@ -276,15 +278,15 @@ DECLARE_INSN(fmulx_s, MATCH_FMULX_S, MASK_FMULX_S) \
 DECLARE_INSN(fdivx_s, MATCH_FDIVX_S, MASK_FDIVX_S) \
 
 b: Criar um arquivo .h com a definição de funcionalidade de cada uma das instruções aproximadas. \
-   OBS: os arquivos estão disponibilizados na pasta chamada **Approx_Instructions**. \
+   OBS: os arquivos estão disponibilizados na pasta chamada **[Approx_Instructions]**. \
    Os arquivos precisam ser inseridos na pasta do SPIKE: riscv-isa-sim/riscv/insns/addx.h subx.h ......  \
    Exemplo do arquivo da instrução de soma aproximada addx.h 
 
      WRITE_RD(sext_xlen(RS1 ^ RS2 ^ 00000000000000000000000000000000)); //ADDX com adder InXA1 
 
 -> **PARA O PONTO FLUTUANTE** 
-   - cria a instrução fxxx_s.h em riscv-isa-sim/riscv/insns (disponível na pasta **Approx_Instructions**) 
-   - os arquivos .c devem ser modificados na pasta riscv-isa-sim/softfloat (disponível na pasta **Approx_Instructions**)
+   - cria a instrução fxxx_s.h em riscv-isa-sim/riscv/insns (disponível na pasta **[Approx_Instructions]**) 
+   - os arquivos .c devem ser modificados na pasta riscv-isa-sim/softfloat (disponível na pasta **[Approx_Instructions]**)
 
    A seguir estão descriminados os arquivo que foram alterados para o projeto das instruções aproximadas de ponto flutuante. 
    
@@ -328,13 +330,13 @@ d: Acrescentar no arquivo riscv-isa-sim/softfloat/softfloat.mk.in
   f32_addx.c \
   f32_subx.c \
   s_addMagsF32x.c \
-  s_subMagsF32x.c \
+  s_subMagsF32x.c 
   
   f32_mulx.c \
   s_roundPackToF32x.c \
-  s_shortShiftRightJam64x \
+  s_shortShiftRightJam64x 
   
-  f32_divx.c \
+  f32_divx.c 
 
 e: Acrescentar no arquivo riscv-isa-sim/softfloat/internals.h
 
@@ -357,7 +359,7 @@ g: Rebuild spike/build
     $ sudo make install
 
 -->> SE DER ERRO NO REBUILD: \
-ex: HGATP_MODE_SV57X4 (fora do escopo) \
+ex: HGATP_MODE_SV57X4 (fora do escopo) 
    - está faltando alguma coisa, alguma declaração na nova instrução.
 
 h: Test Spike
