@@ -277,9 +277,12 @@ DECLARE_INSN(fsubx_s, MATCH_FSUBX_S, MASK_FSUBX_S) \
 DECLARE_INSN(fmulx_s, MATCH_FMULX_S, MASK_FMULX_S) \
 DECLARE_INSN(fdivx_s, MATCH_FDIVX_S, MASK_FDIVX_S) \
 
-b: Criar um arquivo .h com a definição de funcionalidade de cada uma das instruções aproximadas. \
-   OBS: os arquivos estão disponibilizados na pasta chamada **[Approx_Instructions](Approx_Instructions)**. \
-   Os arquivos precisam ser inseridos na pasta do SPIKE: riscv-isa-sim/riscv/insns/addx.h subx.h ......  \
+b: Criar um arquivo .h com a definição de funcionalidade de cada uma das instruções aproximadas. 
+
+   OBS: os arquivos estão disponibilizados na pasta chamada **[Approx_Instructions](Approx_Instructions)**. 
+   
+   Os arquivos precisam ser inseridos na pasta do SPIKE: riscv-isa-sim/riscv/insns/addx.h subx.h ......  
+   
    Exemplo do arquivo da instrução de soma aproximada addx.h 
 
      WRITE_RD(sext_xlen(RS1 ^ RS2 ^ 00000000000000000000000000000000)); //ADDX com adder InXA1 
@@ -288,7 +291,7 @@ b: Criar um arquivo .h com a definição de funcionalidade de cada uma das instr
    - cria a instrução fxxx_s.h em riscv-isa-sim/riscv/insns (disponível na pasta **[Approx_Instructions](Approx_Instructions)**) 
    - os arquivos .c devem ser modificados na pasta riscv-isa-sim/softfloat (disponível na pasta **[Approx_Instructions](Approx_Instructions)**)
 
-   A seguir estão descriminados os arquivo que foram alterados para o projeto das instruções aproximadas de ponto flutuante. 
+   A seguir estão descriminados os arquivos que foram alterados para o projeto das instruções aproximadas de ponto flutuante. 
    
 - faddx_s.h
   - f32_addx.c
