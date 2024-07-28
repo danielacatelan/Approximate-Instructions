@@ -285,8 +285,8 @@ b: Criar um arquivo .h com a definição de funcionalidade de cada uma das instr
      WRITE_RD(sext_xlen(RS1 ^ RS2 ^ 00000000000000000000000000000000)); //ADDX com adder InXA1 
 
 -> **PARA O PONTO FLUTUANTE** 
-   - cria a instrução fxxx_s.h em riscv-isa-sim/riscv/insns (disponível na pasta **[Approx_Instructions]**) 
-   - os arquivos .c devem ser modificados na pasta riscv-isa-sim/softfloat (disponível na pasta **[Approx_Instructions]**)
+   - cria a instrução fxxx_s.h em riscv-isa-sim/riscv/insns (disponível na pasta **[Approx_Instructions](Approx_Instructions)**) 
+   - os arquivos .c devem ser modificados na pasta riscv-isa-sim/softfloat (disponível na pasta **[Approx_Instructions](Approx_Instructions)**)
 
    A seguir estão descriminados os arquivo que foram alterados para o projeto das instruções aproximadas de ponto flutuante. 
    
