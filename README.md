@@ -6,12 +6,13 @@ Professor at Federal University of Mato Grosso do Sul
 #####################################################################
 
 Este repositório, apresenta como inserir instruções aproximadas no conjunto de instruções do RISC-V e do SPIKE.
+
 O projeto de instruções aproximadas do tipo inteiro (addx, subx, mulx, divx) e de ponto flutuante (faddx, fsubx, fmulx, fdivx) fazem parte do meu projeto de doutorado, cujo o tema é: Exploração do Espaço de Projeto com Computação Aproximada.
 
 # Instruções Aproximadas
 
-## Description:
-  > Este repositório mostrará o passo a passo para a inserção de instruções aproximadas no RISC-V e SPIKE.
+## Descrição:
+  > Este repositório mostrará o projeto de desenvolvimento das instruções aproximadas de inteiro e ponto flutuante e o passo a passo para a inserção das mesmas no RISC-V e SPIKE.
 
 ## Ferramentas
 > Para a utilização da instrução aproximada é preciso ter as ferramentas abaixo, devidamente instaladas.
@@ -36,8 +37,8 @@ O projeto de instruções aproximadas do tipo inteiro (addx, subx, mulx, divx) e
 
   2. **RISCV-OPCODES**
      
-     git clone https://github.com/riscv/riscv-opcodes.git \
-     Download. Copy the contents into the riscv-opcodes folder (I replaced the existing encoding.h file) \
+     Acesse o site: https://github.com/riscv/riscv-opcodes.git \
+     Faça o download. Copie o conteúdo para a pasta riscv-opcodes (substitui o arquivo encoding.h existente) \
      https://github.com/riscv/riscv-opcodes/tree/7c3db437d8d3b6961f8eb2931792eaea1c469ff3
 
    4. **RISCV-OPENOCD**
@@ -93,16 +94,16 @@ O projeto de instruções aproximadas do tipo inteiro (addx, subx, mulx, divx) e
    - Após a instalação das ferramentas, é preciso adicionar a instrução aproximada.     
    - Será preciso adicionar a instrução aproximada no RISC-V Toolchain e no SPIKE, seguindo corretamente o passo a passo a seguir. 
   
-1. **Inserção da Instruções Aproximadas no RISCV-TOOLCHAIN**
+1. **Inserção das Instruções Aproximadas no RISCV-TOOLCHAIN**
    
-  a: Enter the directory riscv-opcodes and edit opcodes (riscv-opcodes/opcodes)  
--> integer \
+  a: Acesse o diretório riscv-opcodes e adicione os opcodes (riscv-opcodes/opcodes)  
+-> inteiro \
 addx    rd rs1 rs2 31..25=1  14..12=0 6..2=0x0A 1..0=3 \
 subx    rd rs1 rs2 31..25=1  14..12=0 6..2=0x0B 1..0=3 \
 mulx    rd rs1 rs2 31..25=1  14..12=0 6..2=0x1C 1..0=3 \
 divx    rd rs1 rs2 31..25=1  14..12=0 6..2=0x1D 1..0=3 
 
--> floating point \
+-> ponto flutuante \
 faddx.s   rd rs1 rs2      31..27=0x10 rm       26..25=0 6..2=0x14 1..0=3 \
 fsubx.s   rd rs1 rs2      31..27=0x11 rm       26..25=0 6..2=0x14 1..0=3 \
 fmulx.s   rd rs1 rs2      31..27=0x12 rm       26..25=0 6..2=0x14 1..0=3 \
@@ -111,7 +112,7 @@ fdivx.s   rd rs1 rs2      31..27=0x13 rm       26..25=0 6..2=0x14 1..0=3
      $ cd riscv-opcodes
      $ cat /home/dani/riscv-opcodes/opcodes | /home/dani/riscv-opcodes/parse-opcodes -c > /home/dani/riscv-opcodes/instructionInfo.h
 
-b: Open the instructionInfo.h file and check the lines:
+b: Abra o arquivo instructionInfo.h e verifique se as linhas abaixos foram inseridas:
 
 #define MATCH_ADDX 0x200002b \
 #define MASK_ADDX  0xfe00707f \
@@ -127,7 +128,7 @@ DECLARE_INSN(subx, MATCH_SUBX, MASK_SUBX) \
 DECLARE_INSN(mulx, MATCH_MULX, MASK_MULX) \
 DECLARE_INSN(divx, MATCH_DIVX, MASK_DIVX) 
 
--> floating point \
+-> ponto flutuante \
 #define MATCH_FADDX_S 0x80000053 \
 #define MASK_FADDX_S  0xfe00007f \
 #define MATCH_FSUBX_S 0x88000053 \
@@ -142,9 +143,9 @@ DECLARE_INSN(fsubx_s, MATCH_FSUBX_S, MASK_FSUBX_S) \
 DECLARE_INSN(fmulx_s, MATCH_FMULX_S, MASK_FMULX_S) \
 DECLARE_INSN(fdivx_s, MATCH_FDIVX_S, MASK_FDIVX_S)
 
-$ make install
+      $ make install
 
-c: Add in: \
+c: Entre nos diretorios seguintes e adicione: \
 riscv-gnu-toolchain/riscv-gdb/include/opcode/riscv-opc.h \
 riscv-gnu-toolchain/riscv-binutils/include/opcode/riscv-opc.h
 
@@ -162,7 +163,7 @@ DECLARE_INSN(subx, MATCH_SUBX, MASK_SUBX) \
 DECLARE_INSN(mulx, MATCH_MULX, MASK_MULX) \
 DECLARE_INSN(divx, MATCH_DIVX, MASK_DIVX)
 
--> floating point \
+-> ponto flutuante \
 #define MATCH_FADDX_S 0x80000053 \
 #define MASK_FADDX_S  0xfe00007f \
 #define MATCH_FSUBX_S 0x88000053 \
@@ -177,7 +178,7 @@ DECLARE_INSN(fsubx_s, MATCH_FSUBX_S, MASK_FSUBX_S) \
 DECLARE_INSN(fmulx_s, MATCH_FMULX_S, MASK_FMULX_S) \
 DECLARE_INSN(fdivx_s, MATCH_FDIVX_S, MASK_FDIVX_S) \
 
-d: Add in \
+d: Entre nos diretorios seguintes e adicione: \
 riscv-gnu-toolchain/riscv-gdb/opcodes/riscv-opc.c \
 riscv-gnu-toolchain/riscv-binutils/opcodes/riscv-opc.c
 
@@ -186,7 +187,7 @@ riscv-gnu-toolchain/riscv-binutils/opcodes/riscv-opc.c
 {"mulx",	 0, INSN_CLASS_I, "d,s,t", MATCH_MULX, MASK_MULX, match_opcode, 0}, \
 {"divx",	 0, INSN_CLASS_I, "d,s,t", MATCH_DIVX, MASK_DIVX, match_opcode, 0},
 
--> floating point (in riscv-gdb to remove _OR_ZFINX)
+-> ponto flutuante (em riscv-gdb remova _OR_ZFINX)
 
 {"faddx.s",     0, INSN_CLASS_F_OR_ZFINX,   "D,S,T",     MATCH_FADDX_S|MASK_RM, MASK_FADDX_S|MASK_RM, match_opcode, 0 }, \
 {"faddx.s",     0, INSN_CLASS_F_OR_ZFINX,   "D,S,T,m",   MATCH_FADDX_S, MASK_FADDX_S, match_opcode, 0 }, \
@@ -206,11 +207,11 @@ e: Rebuild RISCV-GNU-TOOLCHAIN
     $ ./configure --prefix=/opt/riscv --with-arch=rv32imafdc --with-abi=ilp32
     $ sudo make
 
-f: Teste da instalação da instrução aproximada no RISCV-Toolchain
+f: Teste da instalação da instrução aproximada no RISCV-Toolchain:
 
     $ cd test/addx.c 
 
-\
+
 
     #include <stdio.h>
      int main(){
@@ -234,7 +235,7 @@ f: Teste da instalação da instrução aproximada no RISCV-Toolchain
     return 0;
     }
 
-\
+
 
     $ riscv32-unknown-elf-gcc addx.c -O1 -march=rv32im -o addx 
     $ riscv32-unknown-elf-objdump -dC addx > addx.dump
@@ -242,7 +243,7 @@ f: Teste da instalação da instrução aproximada no RISCV-Toolchain
 
 2. **Inserção da Instruções Aproximadas no SPIKE**
 
-   a: In the riscv-isa-sim/riscv/encoding.h add the following lines: \
+   a: No diretório riscv-isa-sim/riscv/encoding.h adicione as linhas abaixo: \
       a.1: Verificar se no arquivo encoding.h do PK (riscv-pk/machine/encoding.h) foi atualizado, caso não: atualizar e rebutar o riscv-pk
   
 #define MATCH_ADDX 0x200002b \
@@ -259,7 +260,7 @@ DECLARE_INSN(subx, MATCH_SUBX, MASK_SUBX) \
 DECLARE_INSN(mulx, MATCH_MULX, MASK_MULX) \
 DECLARE_INSN(divx, MATCH_DIVX, MASK_DIVX)
 
--> floating point \
+-> ponto flutuante \
 #define MATCH_FADDX_S 0x80000053 \
 #define MASK_FADDX_S  0xfe00007f \
 #define MATCH_FSUBX_S 0x88000053 \
@@ -277,9 +278,9 @@ DECLARE_INSN(fdivx_s, MATCH_FDIVX_S, MASK_FDIVX_S) \
 b: Criar um arquivo .h com a definição de funcionalidade de cada uma das instruções aproximadas. \
    OBS: os arquivos estão disponibilizados na pasta chamada **Approx_Instructions**. \
    Os arquivos precisam ser inseridos na pasta do SPIKE: riscv-isa-sim/riscv/insns/addx.h subx.h ......  \
-   Exemplo do arquivo da instrução de soma aproximada addx.h \
+   Exemplo do arquivo da instrução de soma aproximada addx.h 
 
-WRITE_RD(sext_xlen(RS1 ^ RS2 ^ 00000000000000000000000000000000)); //ADDX com adder InXA1 
+     WRITE_RD(sext_xlen(RS1 ^ RS2 ^ 00000000000000000000000000000000)); //ADDX com adder InXA1 
 
 -> **PARA O PONTO FLUTUANTE** 
    - cria a instrução fxxx_s.h em riscv-isa-sim/riscv/insns (disponível na pasta **Approx_Instructions**) 
@@ -363,7 +364,7 @@ h: Test Spike
 
     $ spike --isa=RV32I /opt/riscv/riscv32-unknown-elf/bin/pk addx
 
-For new example: 
+Para testar utilizar os comandos: 
 
     $ riscv32-unknown-elf-gcc test.c -O1 -march=rv32im -o test
     $ riscv32-unknown-elf-objdump -dC test > test.dump
