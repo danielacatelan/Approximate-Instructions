@@ -278,7 +278,7 @@ DECLARE_INSN(fmulx_s, MATCH_FMULX_S, MASK_FMULX_S) \
 DECLARE_INSN(fdivx_s, MATCH_FDIVX_S, MASK_FDIVX_S) \
 
 b: Criar um arquivo .h com a definição de funcionalidade de cada uma das instruções aproximadas. \
-   OBS: os arquivos estão disponibilizados na pasta chamada **[Approx_Instructions]**. \
+   OBS: os arquivos estão disponibilizados na pasta chamada **[Approx_Instructions](Approx_Instructions)**. \
    Os arquivos precisam ser inseridos na pasta do SPIKE: riscv-isa-sim/riscv/insns/addx.h subx.h ......  \
    Exemplo do arquivo da instrução de soma aproximada addx.h 
 
