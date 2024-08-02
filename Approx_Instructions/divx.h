@@ -12,7 +12,7 @@ reg_t y   = (RS2 & mask1);
 
 reg_t Bout = ((~(x0 ^ (y ^ Q)) & Bin) | (~x0 & (y ^ Q)));
 
-reg_t R = ((~x0 & (y ^ Q)) | ((y ^ Q) & Cin) | (~x0 & Cin) | (x0 & ~(y ^ Q) & ~Cin));
+reg_t R = ((~x0 & (y ^ Q)) | ((y ^ Q) & Bin) | (~x0 & Bin) | (x0 & ~(y ^ Q) & ~Bin));
 
 reg_t x1 = (RS1 & mask2);
 
