@@ -1,9 +1,9 @@
-//DIVX 2X1 - APSC4
+//DIVX_Q 2X1 - APSC4
 
 reg_t Bin = 0;
 reg_t Q = 0;
 
-//P0
+//B0
 reg_t mask1 = 1;
 reg_t mask2 = 2;
 
@@ -16,6 +16,6 @@ reg_t R = ((~x0 & (y ^ Q)) | ((y ^ Q) & Bin) | (~x0 & Bin) | (x0 & ~(y ^ Q) & ~B
 
 reg_t x1 = (RS1 & mask2);
 
-reg_t Quoc = x1 ^ Bout ^ Q;
+reg_t Quoc = ~(x1 ^ Bout ^ Q);
 
 WRITE_RD(sext_xlen(Quoc));
