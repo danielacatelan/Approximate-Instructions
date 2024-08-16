@@ -101,7 +101,8 @@ O projeto de instruções aproximadas do tipo inteiro (addx, subx, mulx, divx) e
 addx    rd rs1 rs2 31..25=1  14..12=0 6..2=0x0A 1..0=3 \
 subx    rd rs1 rs2 31..25=1  14..12=0 6..2=0x0B 1..0=3 \
 mulx    rd rs1 rs2 31..25=1  14..12=0 6..2=0x1C 1..0=3 \
-divx    rd rs1 rs2 31..25=1  14..12=0 6..2=0x1D 1..0=3 
+divx    rd rs1 rs2 31..25=1  14..12=0 6..2=0x1D 1..0=3 \
+remx    rd rs1 rs2 31..25=1  14..12=0 6..2=0x1E 1..0=3 
 
 -> ponto flutuante \
 faddx.s   rd rs1 rs2      31..27=0x10 rm       26..25=0 6..2=0x14 1..0=3 \
@@ -122,11 +123,14 @@ b: Abra o arquivo instructionInfo.h e verifique se as linhas abaixos foram inser
 #define MASK_MULX  0xfe00707f \
 #define MATCH_DIVX 0x2000077 \
 #define MASK_DIVX  0xfe00707f \
+#define MATCH_REMX 0x200007b \
+#define MASK_REMX  0xfe00707f \
 ... \
 DECLARE_INSN(addx, MATCH_ADDX, MASK_ADDX) \
 DECLARE_INSN(subx, MATCH_SUBX, MASK_SUBX) \
 DECLARE_INSN(mulx, MATCH_MULX, MASK_MULX) \
-DECLARE_INSN(divx, MATCH_DIVX, MASK_DIVX) 
+DECLARE_INSN(divx, MATCH_DIVX, MASK_DIVX) \
+DECLARE_INSN(remx, MATCH_REMX, MASK_REMX) 
 
 -> ponto flutuante \
 #define MATCH_FADDX_S 0x80000053 \
@@ -158,11 +162,14 @@ riscv-gnu-toolchain/riscv-binutils/include/opcode/riscv-opc.h
 #define MASK_MULX  0xfe00707f \
 #define MATCH_DIVX 0x2000077 \
 #define MASK_DIVX  0xfe00707f \
+#define MATCH_REMX 0x200007b \
+#define MASK_REMX  0xfe00707f \
 ... \
 DECLARE_INSN(addx, MATCH_ADDX, MASK_ADDX) \
 DECLARE_INSN(subx, MATCH_SUBX, MASK_SUBX) \
 DECLARE_INSN(mulx, MATCH_MULX, MASK_MULX) \
-DECLARE_INSN(divx, MATCH_DIVX, MASK_DIVX)
+DECLARE_INSN(divx, MATCH_DIVX, MASK_DIVX) \
+DECLARE_INSN(remx, MATCH_REMX, MASK_REMX) 
 
 -> ponto flutuante \
 #define MATCH_FADDX_S 0x80000053 \
@@ -187,7 +194,8 @@ riscv-gnu-toolchain/riscv-binutils/opcodes/riscv-opc.c
 {"addx",	 0, INSN_CLASS_I, "d,s,t", MATCH_ADDX, MASK_ADDX, match_opcode, 0}, \
 {"subx",	 0, INSN_CLASS_I, "d,s,t", MATCH_SUBX, MASK_SUBX, match_opcode, 0}, \
 {"mulx",	 0, INSN_CLASS_I, "d,s,t", MATCH_MULX, MASK_MULX, match_opcode, 0}, \
-{"divx",	 0, INSN_CLASS_I, "d,s,t", MATCH_DIVX, MASK_DIVX, match_opcode, 0},
+{"divx",	 0, INSN_CLASS_I, "d,s,t", MATCH_DIVX, MASK_DIVX, match_opcode, 0}, \
+{"remx",	 0, INSN_CLASS_I, "d,s,t", MATCH_REMX, MASK_REMX, match_opcode, 0}, 
 
 -> ponto flutuante (em riscv-gdb remova _OR_ZFINX)
 
@@ -259,11 +267,14 @@ Compile:
 #define MASK_MULX  0xfe00707f \
 #define MATCH_DIVX 0x2000077 \
 #define MASK_DIVX  0xfe00707f \
+#define MATCH_REMX 0x200007b \
+#define MASK_REMX  0xfe00707f \
 ... \
 DECLARE_INSN(addx, MATCH_ADDX, MASK_ADDX) \
 DECLARE_INSN(subx, MATCH_SUBX, MASK_SUBX) \
 DECLARE_INSN(mulx, MATCH_MULX, MASK_MULX) \
-DECLARE_INSN(divx, MATCH_DIVX, MASK_DIVX)
+DECLARE_INSN(divx, MATCH_DIVX, MASK_DIVX) \
+DECLARE_INSN(remx, MATCH_REMX, MASK_REMX) 
 
 -> ponto flutuante \
 #define MATCH_FADDX_S 0x80000053 \
@@ -322,6 +333,7 @@ riscv_insn_ext_i = \
       subx \
       mulx \
       divx \
+      remx \
       ...
   
 riscv_insn_ext_f = \
