@@ -6,7 +6,6 @@ reg_t Bin = 0;
 reg_t Q = 0;
 
 reg_t Bout0 = ((~(x31 ^ (y0 ^ Q)) & Bin) | (~x31 & (y0 ^ Q)));
-
 reg_t R0 = ((~x31 & (y0 ^ Q)) | ((y0 ^ Q) & Bin) | (~x31 & Bin) | (x31 & ~(y0 ^ Q) & ~Bin));
 .
 .
@@ -24,7 +23,6 @@ reg_t Bin = Q;
 .
 .
 //Line 31 - Quoc 0
-
 //Block 992 
 reg_t Bout992 = ((~(x0 ^ (y0 ^ Q)) & Bin) | (~x0 & (y0 ^ Q)));
 reg_t R992 = ((~x0 & (y0 ^ Q)) | ((y0 ^ Q) & Bin) | (~x0 & Bin) | (x0 & ~(y0 ^ Q) & ~Bin));
@@ -33,7 +31,6 @@ reg_t R992 = ((~x0 & (y0 ^ Q)) | ((y0 ^ Q) & Bin) | (~x0 & Bin) | (x0 & ~(y0 ^ Q
 .
 //Block 1023
 reg_t Bout1023 = ((~(R990 ^ (y31 ^ Q)) & Bin) | (~R990 & (y31 ^ Q)));
-
 reg_t R1023 = ((~R990 & (y31 ^ Q)) | ((y31 ^ Q) & Bin) | (~R990 & Bin) | (R990 & ~(y31 ^ Q) & ~Bin));
 
 reg_t Quoc0 = ~(R991 ^ Bout1023 ^ Q);
