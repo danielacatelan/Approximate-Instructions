@@ -47,9 +47,10 @@ O projeto de instruções aproximadas do tipo inteiro (addx, subx, mulx, divx) e
         
    4. **RISCV-FERSV**
       
-        git clone https://github.com/riscvarchive/riscv-fesvr.git
-      
-	cd riscv-fesvr
+
+         git clone https://github.com/riscvarchive/riscv-fesvr.git
+
+        cd riscv-fesvr
 
 	mkdir build && cd build
  
@@ -61,7 +62,7 @@ O projeto de instruções aproximadas do tipo inteiro (addx, subx, mulx, divx) e
 
    5. **RISCV-PK**
         
-        git clone https://github.com/riscv/riscv-pk.git
+         git clone https://github.com/riscv/riscv-pk.git
       
 	cd riscv-pk
 
@@ -80,7 +81,7 @@ O projeto de instruções aproximadas do tipo inteiro (addx, subx, mulx, divx) e
 	cd ../..
 
   6. **RISCV-ISA-SIM (SPIKE)**
-  7. 
+     
         git clone https://github.com/riscv-software-src/riscv-isa-sim.git 
       
 	cd riscv-isa-sim
