@@ -23,17 +23,17 @@ O projeto de instruções aproximadas do tipo inteiro (addx, subx, mulx, divx) e
 
     $ sudo apt-get install autoconf automake autotools-dev curl python3 libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev libexpat-dev git
 
-    $ git clone https://github.com/riscv/riscv-gnu-toolchain
+    git clone https://github.com/riscv/riscv-gnu-toolchain
      
-    $ cd riscv-gnu-toolchain
+    cd riscv-gnu-toolchain
      
-    $ ./configure --prefix=/opt/riscv --with-arch=rv32i --with-abi=ilp32
+    /configure --prefix=/opt/riscv --with-arch=rv32imafdc --with-abi=ilp32
      
-    $ sudo make
+    sudo make
      
-    $ cd ..
+    cd ..
      
-    $ export PATH=$PATH:/opt/riscv/bin
+    export PATH=$PATH:/opt/riscv/bin
 
   2. **RISCV-OPCODES**
      
@@ -46,48 +46,54 @@ O projeto de instruções aproximadas do tipo inteiro (addx, subx, mulx, divx) e
      git clone https://github.com/riscv/riscv-openocd.git
         
    4. **RISCV-FERSV**
-     
-	$ cd riscv-fesvr
+      
+        git clone https://github.com/riscvarchive/riscv-fesvr.git
+      
+	cd riscv-fesvr
 
-	$ mkdir build && cd build
+	mkdir build && cd build
  
-	$ ../configure --prefix=/opt/riscv
+	../configure --prefix=/opt/riscv
  
-	$ sudo make install
+	sudo make install
  
-	$ cd ../..
+	cd ../..
 
    5. **RISCV-PK**
-     
-	$ cd riscv-pk
+        
+        git clone https://github.com/riscv/riscv-pk.git
+      
+	cd riscv-pk
 
-	$ mkdir build && cd build
+	mkdir build && cd build
  
-	$ ../configure --prefix=/opt/riscv --host=riscv32-unknown-elf
+	../configure --prefix=/opt/riscv --host=riscv32-unknown-elf
  
         OBS: pode ser que precise colocar:
 	
-	    -> $ ../configure --prefix=/opt/riscv --host=riscv32-unknown-elf --with-arch=rv32imafdc_zicsr_zifencei
+	    -> ../configure --prefix=/opt/riscv --host=riscv32-unknown-elf --with-arch=rv32imafdc_zicsr_zifencei
      
-	$ make
+	make
  
-	$ sudo make install
+	sudo make install
  
-	$ cd ../..
+	cd ../..
 
   6. **RISCV-ISA-SIM (SPIKE)**
+  7. 
+        git clone https://github.com/riscv-software-src/riscv-isa-sim.git 
       
-	$ cd riscv-isa-sim
+	cd riscv-isa-sim
 
-	$ sudo apt-get install device-tree-compiler
+	sudo apt-get install device-tree-compiler
  
-	$ mkdir build && cd build
+	mkdir build && cd build
  
-	$ ../configure --prefix=/opt/riscv 
+	../configure --prefix=/opt/riscv 
  
-	$ make
+	make
  
-	$ sudo make install
+	sudo make install
        
 ## Instrução Aproximada
 
@@ -110,8 +116,8 @@ fsubx.s   rd rs1 rs2      31..27=0x11 rm       26..25=0 6..2=0x14 1..0=3 \
 fmulx.s   rd rs1 rs2      31..27=0x12 rm       26..25=0 6..2=0x14 1..0=3 \
 fdivx.s   rd rs1 rs2      31..27=0x13 rm       26..25=0 6..2=0x14 1..0=3  
      
-     $ cd riscv-opcodes
-     $ cat /home/dani/riscv-opcodes/opcodes | /home/dani/riscv-opcodes/parse-opcodes -c > /home/dani/riscv-opcodes/instructionInfo.h
+     cd riscv-opcodes
+     cat /home/dani/riscv-opcodes/opcodes | /home/dani/riscv-opcodes/parse-opcodes -c > /home/dani/riscv-opcodes/instructionInfo.h
 
 b: Abra o arquivo instructionInfo.h e verifique se as linhas abaixos foram inseridas:
 
