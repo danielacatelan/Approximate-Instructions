@@ -393,9 +393,8 @@ h: Teste o SPIKE
 
 Para testar o exemplo disponível na seção do RISC-V (.c) no SPIKE, utilizar os comandos: 
 
-    $ riscv32-unknown-elf-gcc test.c -O1 -march=rv32im -o test
-    $ riscv32-unknown-elf-objdump -dC test > test.dump
-    $ spike --isa=RV32I /opt/riscv/riscv32-unknown-elf/bin/pk test
+    riscv32-unknown-elf-gcc addx.c -O1 -march=rv32imafdc -o addx -lm 
+    spike --isa=RV32IMAFDC /opt/riscv/riscv32-unknown-elf/bin/pk addx
 
 
 
