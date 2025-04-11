@@ -61,6 +61,8 @@ O projeto de instruções aproximadas do tipo inteiro (addx, subx, mulx, divx) e
 	cd ../..
 
    5. **RISCV-PK**
+
+      export PATH=$PATH:/opt/riscv/bin
         
          git clone https://github.com/riscv/riscv-pk.git
       
