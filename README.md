@@ -202,7 +202,7 @@ DECLARE_INSN(remx, MATCH_REMX, MASK_REMX)
 DECLARE_INSN(faddx_s, MATCH_FADDX_S, MASK_FADDX_S) \
 DECLARE_INSN(fsubx_s, MATCH_FSUBX_S, MASK_FSUBX_S) \
 DECLARE_INSN(fmulx_s, MATCH_FMULX_S, MASK_FMULX_S) \
-DECLARE_INSN(fdivx_s, MATCH_FDIVX_S, MASK_FDIVX_S) \
+DECLARE_INSN(fdivx_s, MATCH_FDIVX_S, MASK_FDIVX_S) 
 
 d: Entre nos diretorios seguintes e adicione: 
 
@@ -215,16 +215,16 @@ riscv-gnu-toolchain/riscv-binutils/opcodes/riscv-opc.c
 {"divx",	 0, INSN_CLASS_I, "d,s,t", MATCH_DIVX, MASK_DIVX, match_opcode, 0}, \
 {"remx",	 0, INSN_CLASS_I, "d,s,t", MATCH_REMX, MASK_REMX, match_opcode, 0}, 
 
--> ponto flutuante (em riscv-gdb remova _OR_ZFINX)
+-> ponto flutuante (em riscv-gdb remova _INX)
 
-{"faddx.s",     0, INSN_CLASS_F_OR_ZFINX,   "D,S,T",     MATCH_FADDX_S|MASK_RM, MASK_FADDX_S|MASK_RM, match_opcode, 0 }, \
-{"faddx.s",     0, INSN_CLASS_F_OR_ZFINX,   "D,S,T,m",   MATCH_FADDX_S, MASK_FADDX_S, match_opcode, 0 }, \
-{"fsubx.s",     0, INSN_CLASS_F_OR_ZFINX,   "D,S,T",     MATCH_FSUBX_S|MASK_RM, MASK_FSUBX_S|MASK_RM, match_opcode, 0 }, \
-{"fsubx.s",     0, INSN_CLASS_F_OR_ZFINX,   "D,S,T,m",   MATCH_FSUBX_S, MASK_FSUBX_S, match_opcode, 0 }, \
-{"fmulx.s",    0, INSN_CLASS_F_OR_ZFINX,   "D,S,T",     MATCH_FMULX_S|MASK_RM, MASK_FMULX_S|MASK_RM, match_opcode, 0 }, \
-{"fmulx.s",    0, INSN_CLASS_F_OR_ZFINX,   "D,S,T,m",   MATCH_FMULX_S, MASK_FMULX_S, match_opcode, 0 }, \
-{"fdivx.s",    0, INSN_CLASS_F_OR_ZFINX,   "D,S,T",     MATCH_FDIVX_S|MASK_RM, MASK_FDIVX_S|MASK_RM, match_opcode, 0 }, \
-{"fdivx.s",    0, INSN_CLASS_F_OR_ZFINX,   "D,S,T,m",   MATCH_FDIVX_S, MASK_FDIVX_S, match_opcode, 0 },
+{"faddx.s",     0, INSN_CLASS_F_INX,   "D,S,T",     MATCH_FADDX_S|MASK_RM, MASK_FADDX_S|MASK_RM, match_opcode, 0 }, \
+{"faddx.s",     0, INSN_CLASS_F_INX,   "D,S,T,m",   MATCH_FADDX_S, MASK_FADDX_S, match_opcode, 0 }, \
+{"fsubx.s",     0, INSN_CLASS_F_INX,   "D,S,T",     MATCH_FSUBX_S|MASK_RM, MASK_FSUBX_S|MASK_RM, match_opcode, 0 }, \
+{"fsubx.s",     0, INSN_CLASS_F_INX,   "D,S,T,m",   MATCH_FSUBX_S, MASK_FSUBX_S, match_opcode, 0 }, \
+{"fmulx.s",    0, INSN_CLASS_F_INX,   "D,S,T",     MATCH_FMULX_S|MASK_RM, MASK_FMULX_S|MASK_RM, match_opcode, 0 }, \
+{"fmulx.s",    0, INSN_CLASS_F_INX,   "D,S,T,m",   MATCH_FMULX_S, MASK_FMULX_S, match_opcode, 0 }, \
+{"fdivx.s",    0, INSN_CLASS_F_INX,   "D,S,T",     MATCH_FDIVX_S|MASK_RM, MASK_FDIVX_S|MASK_RM, match_opcode, 0 }, \
+{"fdivx.s",    0, INSN_CLASS_F_INX,   "D,S,T,m",   MATCH_FDIVX_S, MASK_FDIVX_S, match_opcode, 0 },
 
 e: Rebuild RISCV-GNU-TOOLCHAIN
 
