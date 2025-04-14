@@ -124,8 +124,10 @@ fdivx.s   rd rs1 rs2      31..27=0x13 rm       26..25=0 6..2=0x14 1..0=3
      cd riscv-opcodes
      cat /home/dani/riscv-opcodes/opcodes | /home/dani/riscv-opcodes/parse-opcodes -c > /home/dani/riscv-opcodes/instructionInfo.h
 
--> Comando alternativo: \ 
+-> Comando alternativo: \
+
      cd riscv-opcodes \
+     
      python2 /home/suporte/riscv-opcodes/parse-opcodes -c < /home/suporte/riscv-opcodes/opcodes > /home/suporte/riscv-opcodes/instructionInfo.h
   
 
