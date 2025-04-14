@@ -118,9 +118,16 @@ faddx.s   rd rs1 rs2      31..27=0x10 rm       26..25=0 6..2=0x14 1..0=3 \
 fsubx.s   rd rs1 rs2      31..27=0x11 rm       26..25=0 6..2=0x14 1..0=3 \
 fmulx.s   rd rs1 rs2      31..27=0x12 rm       26..25=0 6..2=0x14 1..0=3 \
 fdivx.s   rd rs1 rs2      31..27=0x13 rm       26..25=0 6..2=0x14 1..0=3  
+
+-> OBS: caso dê erro no comando abaixo, verificar a versão do python. Precisa ser o python2
      
      cd riscv-opcodes
      cat /home/dani/riscv-opcodes/opcodes | /home/dani/riscv-opcodes/parse-opcodes -c > /home/dani/riscv-opcodes/instructionInfo.h
+
+-> Comando alternativo: 
+     cd riscv-opcodes
+     python2 /home/suporte/riscv-opcodes/parse-opcodes -c < /home/suporte/riscv-opcodes/opcodes > /home/suporte/riscv-opcodes/instructionInfo.h
+  
 
 b: Abra o arquivo instructionInfo.h e verifique se as linhas abaixos foram inseridas:
 
