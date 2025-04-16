@@ -267,7 +267,7 @@ A instrução aproximada é chamada por meio do comando *_asm volatile_*, e [x],
 
 Compile:
 
-    $ riscv32-unknown-elf-gcc addx.c -O1 -march=rv32im -o addx 
+    $ riscv32-unknown-elf-gcc addx.c -O1 -march=rv32imafdc -o addx 
     $ riscv32-unknown-elf-objdump -dC addx > addx.dump
 
 
