@@ -155,7 +155,7 @@ Cout18 = (Cout18 << 1);
 reg_t S18 = ((~x0 & y0) | (y0 & Cout17) | (~x0 & Cout17) | (x0 & ~y0 & ~Cout17));
 
 //P19
-mask = 262144;
+mask = 524288;
 x0 = (RS1 & mask);
 y0 = (RS2 & mask);
 reg_t Cout19 = (((x0 ^ ~y0) & Cout18) | (~x0 & y0));
