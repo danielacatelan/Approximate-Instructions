@@ -27,7 +27,7 @@ O projeto de instruções aproximadas do tipo inteiro (addx, subx, mulx, divx) e
      
     cd riscv-gnu-toolchain
      
-    /configure --prefix=/opt/riscv --with-arch=rv32imafdc --with-abi=ilp32
+    ./configure --prefix=/opt/riscv --with-arch=rv32imafdc --with-abi=ilp32
      
     sudo make
      
