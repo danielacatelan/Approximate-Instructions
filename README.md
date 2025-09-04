@@ -120,6 +120,7 @@ fmulx.s   rd rs1 rs2      31..27=0x12 rm       26..25=0 6..2=0x14 1..0=3 \
 fdivx.s   rd rs1 rs2      31..27=0x13 rm       26..25=0 6..2=0x14 1..0=3  
 
 -> OBS: caso dê erro no comando abaixo, verificar a versão do python. Precisa ser o python2
+-> OBS: troque /home/dani pelo caminho do SEU computador
      
      cd riscv-opcodes
      cat /home/dani/riscv-opcodes/opcodes | /home/dani/riscv-opcodes/parse-opcodes -c > /home/dani/riscv-opcodes/instructionInfo.h
