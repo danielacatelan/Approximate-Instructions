@@ -7,7 +7,7 @@
 Navigate to the `riscv-opcodes` directory and add the following opcodes to `riscv-opcodes/opcodes`:
 
 Write the content below in some file called `"opcodes.txt"`:
-**Integer Instructions:**
+**Integer Instructions: fully Approximate:**
 ```
 addx    rd rs1 rs2 31..25=1  14..12=0 6..2=0x0A 1..0=3
 subx    rd rs1 rs2 31..25=1  14..12=0 6..2=0x0B 1..0=3
@@ -16,6 +16,23 @@ divx    rd rs1 rs2 31..25=1  14..12=0 6..2=0x1D 1..0=3
 remx    rd rs1 rs2 31..25=1  14..12=0 6..2=0x1E 1..0=3
 ```
 
+** Mixed integer instructions: (MBS - Exact and LBS - Approximate)**
+```
+m_addx rd rs1 rs2 31..25=1 14..12=1 6..2=0x0A 1..0=3															
+m_subx rd rs1 rs2 31..25=1 14..12=1 6..2=0x0B 1..0=3															
+m_mulx rd rs1 rs2 31..25=1 14..12=1 6..2=0x1D 1..0=3															
+m_divx rd rs1 rs2 31..25=1 14..12=1 6..2=0x1E 1..0=3															
+m_remx rd rs1 rs2 31..25=1 14..12=1 6..2=0x1F 1..0=3															
+```
+
+** Mixed integer instructions: (MBS - Approximate and LBS - Exact)**
+```
+addx_m rd rs1 rs2 31..25=1 14..12=2 6..2=0x0A 1..0=3															
+subx_m rd rs1 rs2 31..25=1 14..12=2 6..2=0x0B 1..0=3															
+mulx_m rd rs1 rs2 31..25=1 14..12=2 6..2=0x1D 1..0=3															
+divx_m rd rs1 rs2 31..25=1 14..12=2 6..2=0x1E 1..0=3															
+remx_m rd rs1 rs2 31..25=1 14..12=2 6..2=0x1F 1..0=3																														
+```
 **Floating-Point Instructions:**
 ```
 faddx.s   rd rs1 rs2      31..27=0x10 rm       26..25=0 6..2=0x14 1..0=3
