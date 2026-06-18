@@ -7,6 +7,7 @@
 Navigate to the `riscv-opcodes` directory and add the following opcodes to `riscv-opcodes/opcodes`:
 
 Write the content below in some file called `"opcodes.txt"`:
+
 **Integer Instructions: fully Approximate:**
 ```
 addx    rd rs1 rs2    31..25=1     14..12=0    6..2=0x0A    1..0=3
@@ -22,7 +23,7 @@ m_addx rd rs1 rs2    31..25=1    14..12=1    6..2=0x0A    1..0=3
 m_subx rd rs1 rs2    31..25=1    14..12=1    6..2=0x0B    1..0=3
 m_mulx rd rs1 rs2    31..25=1    14..12=1    6..2=0x1D    1..0=3
 m_divx rd rs1 rs2    31..25=1    14..12=1    6..2=0x1E    1..0=3
-m_remx rd rs1 rs2    31..25=1    14..12=1    6..2=0x1F    1..0=3															
+m_remx rd rs1 rs2    31..25=1    14..12=1    6..2=0x1F    1..0=3
 ```
 
 **Mixed integer instructions: (MBS - Approximate and LBS - Exact)**
@@ -31,7 +32,7 @@ addx_m rd rs1 rs2    31..25=1    14..12=2    6..2=0x0A    1..0=3
 subx_m rd rs1 rs2    31..25=1    14..12=2    6..2=0x1B    1..0=3
 mulx_m rd rs1 rs2    31..25=1    14..12=2    6..2=0x1D    1..0=3
 divx_m rd rs1 rs2    31..25=1    14..12=2    6..2=0x1E    1..0=3
-remx_m rd rs1 rs2    31..25=1    14..12=2    6..2=0x1F    1..0=3																														
+remx_m rd rs1 rs2    31..25=1    14..12=2    6..2=0x1F    1..0=3
 ```
 **Floating-Point Instructions:**
 ```
@@ -47,6 +48,7 @@ Change `/path/to/opcodes` with the actual path to the `opcodes.txt` file you wro
 
 ```bash
 cd  /root/riscv-dev/riscv-opcodes # if you are using the docker
+ ELSE
 cat /path/to/opcodes/opcodes.txt |  python2 parse-opcodes -c > /path/to/opcodes/instructionInfo.h
 ```
 
@@ -68,6 +70,26 @@ Check that `instructionInfo.h` contains the following definitions:
 #define MASK_DIVX  0xfe00707f
 #define MATCH_REMX 0x200007b
 #define MASK_REMX  0xfe00707f
+#define MATCH_M_ADDX 0x200102b
+#define MASK_M_ADDX  0xfe00707f
+#define MATCH_M_SUBX 0x200102f
+#define MASK_M_SUBX  0xfe00707f
+#define MATCH_M_MULX 0x2001077
+#define MASK_M_MULX  0xfe00707f
+#define MATCH_M_DIVX 0x200107b
+#define MASK_M_DIVX  0xfe00707f
+#define MATCH_M_REMX 0x200107f
+#define MASK_M_REMX  0xfe00707f
+#define MATCH_ADDX_M 0x200202b
+#define MASK_ADDX_M  0xfe00707f
+#define MATCH_SUBX_M 0x200206f
+#define MASK_SUBX_M  0xfe00707f
+#define MATCH_MULX_M 0x2002077
+#define MASK_MULX_M  0xfe00707f
+#define MATCH_DIVX_M 0x200207b
+#define MASK_DIVX_M  0xfe00707f
+#define MATCH_REMX_M 0x200207f
+#define MASK_REMX_M  0xfe00707f
 
 // Declarations
 DECLARE_INSN(addx, MATCH_ADDX, MASK_ADDX)
@@ -75,6 +97,16 @@ DECLARE_INSN(subx, MATCH_SUBX, MASK_SUBX)
 DECLARE_INSN(mulx, MATCH_MULX, MASK_MULX)
 DECLARE_INSN(divx, MATCH_DIVX, MASK_DIVX)
 DECLARE_INSN(remx, MATCH_REMX, MASK_REMX)
+DECLARE_INSN(m_addx, MATCH_M_ADDX, MASK_M_ADDX)
+DECLARE_INSN(m_subx, MATCH_M_SUBX, MASK_M_SUBX)
+DECLARE_INSN(m_mulx, MATCH_M_MULX, MASK_M_MULX)
+DECLARE_INSN(m_divx, MATCH_M_DIVX, MASK_M_DIVX)
+DECLARE_INSN(m_remx, MATCH_M_REMX, MASK_M_REMX)
+DECLARE_INSN(addx_m, MATCH_ADDX_M, MASK_ADDX_M)
+DECLARE_INSN(subx_m, MATCH_SUBX_M, MASK_SUBX_M)
+DECLARE_INSN(mulx_m, MATCH_MULX_M, MASK_MULX_M)
+DECLARE_INSN(divx_m, MATCH_DIVX_M, MASK_DIVX_M)
+DECLARE_INSN(remx_m, MATCH_REMX_M, MASK_REMX_M)
 ```
 
 **Floating-Point Instructions:**
