@@ -152,13 +152,31 @@ Add instruction specifications just as before to:
 
 **Note:** For riscv-gdb, remove `_INX` from `INSN_CLASS_F_INX`.
 
-**Integer Instructions:**
+**Integer Instructions: fully Approximate:**
 ```c
 {"addx",    0, INSN_CLASS_I, "d,s,t", MATCH_ADDX, MASK_ADDX, match_opcode, 0},
 {"subx",    0, INSN_CLASS_I, "d,s,t", MATCH_SUBX, MASK_SUBX, match_opcode, 0},
 {"mulx",    0, INSN_CLASS_I, "d,s,t", MATCH_MULX, MASK_MULX, match_opcode, 0},
 {"divx",    0, INSN_CLASS_I, "d,s,t", MATCH_DIVX, MASK_DIVX, match_opcode, 0},
 {"remx",    0, INSN_CLASS_I, "d,s,t", MATCH_REMX, MASK_REMX, match_opcode, 0},
+```
+
+**Mixed integer instructions: (MBS - Exact and LBS - Approximate)**
+```
+{"m_addx",    0, INSN_CLASS_I, "d,s,t", MATCH_M_ADDX, MASK_M_ADDX, match_opcode, 0},
+{"m_subx",    0, INSN_CLASS_I, "d,s,t", MATCH_M_SUBX, MASK_M_SUBX, match_opcode, 0},
+{"m_mulx",    0, INSN_CLASS_I, "d,s,t", MATCH_M_MULX, MASK_M_MULX, match_opcode, 0},			
+{"m_divx",    0, INSN_CLASS_I, "d,s,t", MATCH_M_DIVX, MASK_M_DIVX, match_opcode, 0},
+{"m_remx",    0, INSN_CLASS_I, "d,s,t", MATCH_M_REMX, MASK_M_REMX, match_opcode, 0},
+```
+
+**Mixed integer instructions: (MBS - Approximate and LBS - Exact)**
+```
+{"addx_m",    0, INSN_CLASS_I, "d,s,t", MATCH_ADDX_M, MASK_ADDX_M, match_opcode, 0},
+{"subx_m",    0, INSN_CLASS_I, "d,s,t", MATCH_SUBX_M, MASK_SUBX_M, match_opcode, 0},
+{"mulx_m",    0, INSN_CLASS_I, "d,s,t", MATCH_MULX_M, MASK_MULX_M, match_opcode, 0},
+{"divx_m",    0, INSN_CLASS_I, "d,s,t", MATCH_DIVX_M, MASK_DIVX_M, match_opcode, 0},
+{"remx_m",    0, INSN_CLASS_I, "d,s,t", MATCH_REMX_M, MASK_REMX_M, match_opcode, 0},
 ```
 
 **Floating-Point Instructions:**
