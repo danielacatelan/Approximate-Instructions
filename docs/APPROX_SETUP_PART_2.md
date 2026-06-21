@@ -59,6 +59,14 @@ riscv_insn_ext_i = \
     mulx \
     divx \
     remx \
+    m_addx \
+    m_subx \
+    m_mulx \
+    m_divx \
+    addx_m \
+    subx_m \
+    mulx_m \
+    divx_m \
     # ... other instructions ...
 
 riscv_insn_ext_f = \
@@ -82,7 +90,7 @@ s_addMagsF32x.c \
 s_subMagsF32x.c \
 f32_mulx.c \
 s_roundPackToF32x.c \
-s_shortShiftRightJam64x \
+s_shortShiftRightJam64x.c \
 f32_divx.c
 ```
 
