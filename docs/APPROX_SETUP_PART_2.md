@@ -91,7 +91,7 @@ s_subMagsF32x.c \
 f32_mulx.c \
 s_roundPackToF32x.c \
 s_shortShiftRightJam64x.c \
-f32_divx.c
+f32_divx.c \
 ```
 
 ### Step 5: Update Internal Headers
