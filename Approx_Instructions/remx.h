@@ -1,6 +1,13 @@
 //Remx - 64X32
 //Line 0 - Quoc 31
 
+//NÃO FINALIZADA
+
+WRITE_RD(sext_xlen(RS1 ^ RS2));
+
+/*
+
+
 //Block 0 
 reg_t Bin = 0;
 reg_t Q = 0;
@@ -95,3 +102,4 @@ reg_t Rem31 = ((~R1023 & (correct31 ^ Q)) | ((correct31 ^ Q) & Bin) | (~R1023 & 
 Remx= ((Rem31) | (Rem30) | (Rem29) | (Rem28) | (Rem27) | (Rem26) | (Rem25) | (Rem24) | (Rem23) | (Rem22) | (Rem21) | (Rem20) | (Rem19) | (Rem18) | (Rem17) | (Rem16) | (Rem15) | (Rem14) | (Rem13) | (Rem12) | (Rem11) | (Rem10) | (Rem9) | (Rem8) | (Rem7) | (Rem6) | (Rem5) | (Rem4) | (Rem3) | (Rem2) | (Rem1) | (Rem0));
 
 WRITE_RD(sext_xlen(Remx));
+*/
