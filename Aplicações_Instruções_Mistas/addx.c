@@ -1,16 +1,17 @@
 #include <stdio.h>
 #include <stdint.h>
 
-inline int ADD (int a, int b)
+inline int ADDX (int a, int b)
 {
-  int ADD;
+  int ADDX;
   asm volatile (
-        "add   %[z], %[x], %[y]\n\t"
-        : [z] "=r" (ADD)
+        "addx   %[z], %[x], %[y]\n\t"
+        : [z] "=r" (ADDX)
         : [x] "r" (a), [y] "r" (b)
     );
-  return (ADD);
+  return (ADDX);
 }
+
 
 int main() {
 
@@ -155,7 +156,7 @@ int main() {
 
     for (int i = 0; i < 1000; i++) {
         //resultado[i] = A[i] + B[i]; //EXATO
-        resultado[i] = ADD(A[i],B[i]);
+        resultado[i] = ADDX(A[i],B[i]);
         printf("%d %d %d\n", A[i], B[i], resultado[i]);
     }
 
